@@ -1,0 +1,94 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p_rgh;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    terrain_MV12_inlet1
+    {
+        type            zeroGradient;
+        value           $internalField;
+    }
+    terrain_MV12_inlet2
+    {
+        type            zeroGradient;
+        value           $internalField;
+    }
+    
+    terrain_MV12_outlet
+    {
+        type            totalPressure;
+        p0              $internalField;
+        value           $internalField;
+    }
+
+    terrain_MV12_upper_river
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_lower_river
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_inner_gravel
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_outer_gravel
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_vegetation
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_wallsSW				//inlet side wall
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+    terrain_MV12_wallsNE				//outlet side wall
+    {
+        type            totalPressure;
+        p0              uniform 0;
+    }
+
+    terrain_MV12_lid
+    {
+        type            totalPressure;
+        p0              uniform 0;
+    }
+    terrain_MV12_wallsSE				//lower side wall
+    {
+        type            totalPressure;
+        p0              uniform 0;
+    }
+    terrain_MV12_wallsNW				//upper side wall
+    {
+        type            totalPressure;
+        p0              uniform 0;
+    }
+}
+
+// ************************************************************************* //

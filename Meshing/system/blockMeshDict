@@ -1,0 +1,93 @@
+//Block mesh dimensions of MV8, cell size 0.8m
+//V10+ lid at z=23m
+
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+convertToMeters 1.0;
+
+// Vertices of the background box
+vertices
+(
+    (-4.00	-5.00	8.00)
+    ( 84.00	-5.00	8.00)
+    ( 84.00	86.20	8.00)
+    (-4.00	86.20	8.00)
+    (-4.00	-5.00	24.00)
+    ( 84.00	-5.00	24.00)
+    ( 84.00	86.20	24.00)
+    (-4.00	86.20	24.00)
+);
+
+// One single hexahedral block
+blocks
+(
+    hex (0 1 2 3 4 5 6 7)
+    (110 114 20)        // number of cells
+    simpleGrading (1 1 1)
+);
+
+// No curved edges
+edges
+(
+);
+
+// Boundary patches
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)   // x = -4
+	    (0 1 5 4)   // y = -5
+        );
+    }
+
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 6 5)   // x = 84.00
+        );
+    }
+
+    sideWalls
+    {
+        type wall;
+        faces
+        (
+            (3 7 6 2)   // y = 86.20
+        );
+    }
+
+    bottom
+    {
+        type wall;
+        faces
+        (
+            (0 3 2 1)   // z = 8
+        );
+    }
+
+    top
+    {
+        type patch;    // air outlet later
+        faces
+        (
+            (4 5 6 7)   // z = 24
+        );
+    }
+);
+
+mergePatchPairs
+(
+);

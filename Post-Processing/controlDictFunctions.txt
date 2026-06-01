@@ -1,0 +1,27 @@
+functions
+{
+    max_U
+    {
+        type            volFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        regionType      all;
+        operation       max;
+        fields          (U);
+        writeFields     false;
+        writeControl    timeStep;
+        writeInterval   1;
+        log             true;
+    }
+    maxMag_U
+    {
+        type            volFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        regionType      all;
+        operation       maxMag;
+        fields          (U);
+        writeFields     false;
+        writeControl    timeStep;
+        writeInterval   1;
+        log             true;
+    }
+}

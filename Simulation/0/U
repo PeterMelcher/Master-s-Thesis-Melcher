@@ -1,0 +1,93 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// change volumetricFlowRate value for the following patches: terrain_MV12_inlet1, terrain_MV12_inlet2
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (1 0 0);
+
+boundaryField
+{
+    terrain_MV12_inlet1
+	{
+        type            variableHeightFlowRateInletVelocity;
+        flowRate        5.01;
+        alpha           alpha.water;
+        value           uniform (0 0 0);
+	}
+    terrain_MV12_inlet2
+	{
+        type            variableHeightFlowRateInletVelocity;
+        flowRate        0.55;
+        alpha           alpha.water;
+        value           uniform (0 0 0);
+	}
+
+    terrain_MV12_outlet
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+
+    terrain_MV12_upper_river
+    {
+        type            noSlip;
+    }
+    terrain_MV12_lower_river
+    {
+        type            noSlip;
+    }
+    terrain_MV12_inner_gravel
+    {
+        type            noSlip;
+    }
+    terrain_MV12_outer_gravel
+    {
+        type            noSlip;
+    }
+    terrain_MV12_vegetation
+    {
+        type            noSlip;
+    }
+    terrain_MV12_wallsSW				//inlet side wall
+    {
+        type            noSlip;
+    }
+    terrain_MV12_wallsNE				//outlet side wall
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+
+    terrain_MV12_lid
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    terrain_MV12_wallsSE				//lower side wall
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    terrain_MV12_wallsNW				//upper side wall
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+}
+
+// ************************************************************************* //

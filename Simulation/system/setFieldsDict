@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+defaultFieldValues
+(
+    volScalarFieldValue alpha.water 0
+);
+
+regions
+(
+    surfaceToCell
+    {
+        // Path relative to the case directory. Standard practice is to put it here.
+        file            "system/setFields/MV12_WaterV3.stl";
+        
+        // A point strictly OUTSIDE the water volume
+        outsidePoints   ((74 33 20));
+        
+        includeCut      false;
+        includeInside   true;
+        includeOutside  false;
+        nearDistance    -1;
+        curvature       -100;
+
+        fieldValues
+        (
+            volScalarFieldValue alpha.water 1
+        );
+    }
+    // Inlet 1 — coordinates to be updated
+    boxToCell
+    {
+        box (0.2 64.461 15.01) (3.5 78.061 18.1);
+        fieldValues
+        (
+            volScalarFieldValue alpha.water 1
+        );
+    }
+
+    // Inlet 2 — coordinates to be updated
+    boxToCell
+    {
+        box (0.2 38.516 15.01) (4.0 47.516 18.1);
+        fieldValues
+        (
+            volScalarFieldValue alpha.water 1
+        );
+    }
+);
+
+// ************************************************************************* //

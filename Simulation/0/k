@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0.001;
+
+boundaryField
+{
+    terrain_MV12_inlet1
+    {
+        type            fixedValue;
+        value           uniform 0.001;
+    }
+    terrain_MV12_inlet2
+    {
+        type            fixedValue;
+        value           uniform 0.001;
+    }
+    
+    terrain_MV12_outlet
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.001;
+        value           uniform 0.001;
+    }
+
+    terrain_MV12_upper_river
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_lower_river
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_inner_gravel
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_outer_gravel
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_vegetation
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_wallsSW				//inlet side wall
+    {
+        type            kqRWallFunction;
+        value           uniform 0.001;
+    }
+    terrain_MV12_wallsNE				//outlet side wall
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.001;
+        value           uniform 0.001;
+    }
+
+    terrain_MV12_lid
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.001;
+        value           uniform 0.001;
+    }
+    terrain_MV12_wallsSE				//lower side wall
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.001;
+        value           uniform 0.001;
+    }
+    terrain_MV12_wallsNW				//upper side wall
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.001;
+        value           uniform 0.001;
+    }
+}
+
+// ************************************************************************* //

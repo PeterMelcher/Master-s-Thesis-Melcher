@@ -1,0 +1,106 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ // change Ks value for the following patches: terrain_MV12_upper_river, terrain_MV12_lower_river terrain_MV12_inner_gravel, terrain_MV12_outer_grave, terrain_MV12_vegetation
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    terrain_MV12_inlet1
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    terrain_MV12_inlet2
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    terrain_MV12_outlet
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    terrain_MV12_upper_river 
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.044;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_lower_river
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.080;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_inner_gravel
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.1;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_outer_gravel
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.1;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_vegetation
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.15;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_wallsSW				//inlet side wall
+    {
+        type            nutkRoughWallFunction;
+      	Ks              uniform 0.0001;
+      	Cs              uniform 0.5;
+      	value           uniform 0;
+    }
+    terrain_MV12_wallsNE				//outlet side wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    terrain_MV12_lid
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    terrain_MV12_wallsSE				//lower side wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    terrain_MV12_wallsNW				//upper side wall
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+}
+
+// ************************************************************************* //
