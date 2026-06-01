@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1256125075.svg)](https://doi.org/10.5281/zenodo.20490877)
+
 The directory is grouped in the following folders:
 
 * Pre-Processing
